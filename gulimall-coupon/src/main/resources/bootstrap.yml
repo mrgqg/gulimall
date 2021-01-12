@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: gulimall-coupon
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  #nacos服务注册地址
+        #server-addr: 192.168.0.133:1111  #nginx 服务注册地址（集群配置）
+      config:
+        #server-addr: 192.168.0.133:1111  #通过nginx 配置中心地址（集群配置）
+        server-addr: localhost:8848  #nacos配置中心地址
+        file-extension: yaml
+        group: DEFAULT_GROUP  #不指定的话默认是DEFAULT_GROUP，若配置中心无此分组配置 则加载application.yml中配置
+        #namespace: f55ee505-c830-4c6b-90fb-de2f9832f1b7
+        #group: DEFAULT_GROUP
+        #${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+        #nacos-config-client-dev.yaml  一定要是yaml(0.9版本nacos)
+        ext-config[0]:  #配置中心中的配置优先生效，
+          data-id: gulimall-coupon-test.yml
+          group: test
+          refresh: true
+
+
+

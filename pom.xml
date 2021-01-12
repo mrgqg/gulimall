@@ -8,12 +8,19 @@
     <name>gulimall</name>
     <description>聚合服务</description>
     <packaging>pom</packaging>
-
+    <properties>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+    </properties>
     <modules>
+        <module>gulimall-common</module>
         <module>gulimall-coupon</module>
         <module>gulimall-member</module>
         <module>gulimall-order</module>
         <module>gulimall-product</module>
         <module>gulimall-ware</module>
+        <module>gulimall-gateway</module>
+        <module>renren-fast</module>
+        <module>gulimall-third-service</module>
+        <module>renren-generator</module>
     </modules>
 </project>
