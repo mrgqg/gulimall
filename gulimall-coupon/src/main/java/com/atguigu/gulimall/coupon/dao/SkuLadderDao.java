@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 商品阶梯价格
  * 
- * @author Mrguo
- * @email 948485649@qq.com
- * @date 2020-12-29 10:40:16
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:36:40
  */
 @Mapper
 public interface SkuLadderDao extends BaseMapper<SkuLadderEntity> {

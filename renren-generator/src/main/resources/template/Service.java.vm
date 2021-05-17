@@ -1,0 +1,22 @@
+package ${package}.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import ${package}.common.Dto;
+import ${package}.common.BaseQuery;
+import ${package}.utils.PageUtils;
+import ${package}.pojo.${className};
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service extends IService<${className}> {
+
+    Dto<PageUtils> queryPage(BaseQuery query);
+}
+

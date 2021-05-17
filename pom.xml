@@ -19,8 +19,12 @@
         <module>gulimall-product</module>
         <module>gulimall-ware</module>
         <module>gulimall-gateway</module>
+        <module>gulimall-search</module>
         <module>renren-fast</module>
         <module>gulimall-third-service</module>
         <module>renren-generator</module>
+
     </modules>
+    <!--后台接口文档地址 https://easydoc.xyz/doc/75716633/ZUqEdvA4/hKJTcbfd-->
+    <!--项目源码码云地址：https://gitee.com/agoni_no/gulimall-->
 </project>

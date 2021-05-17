@@ -9,9 +9,9 @@ import java.util.Map;
 /**
  * 秒杀商品通知订阅
  *
- * @author Mrguo
- * @email 948485649@qq.com
- * @date 2020-12-29 10:40:16
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:36:39
  */
 public interface SeckillSkuNoticeService extends IService<SeckillSkuNoticeEntity> {
 

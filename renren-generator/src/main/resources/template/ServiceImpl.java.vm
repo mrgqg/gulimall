@@ -1,0 +1,32 @@
+package ${package}.service.impl;
+
+
+import org.springframework.stereotype.Service;
+import java.util.Map;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import ${package}.common.Dto;
+import ${package}.common.BaseQuery;
+import ${package}.common.Query;
+import ${package}.utils.PageUtils;
+import ${package}.utils.DtoUtil;
+import ${package}.mapper.${className}Mapper;
+import ${package}.pojo.${className};
+import ${package}.service.${className}Service;
+
+
+@Service("${classname}Service")
+public class ${className}ServiceImpl extends ServiceImpl<${className}Mapper, ${className}> implements ${className}Service {
+
+    @Override
+    public Dto<PageUtils> queryPage(BaseQuery query) {
+        IPage<${className}> page = this.page(
+                new Query<${className}>().getPage(query),
+                new QueryWrapper<${className}>()
+        );
+
+        return DtoUtil.returnDataSuccess(new PageUtils(page));
+    }
+
+}

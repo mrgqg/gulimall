@@ -1,9 +1,7 @@
 package com.atguigu.gulimall.member.controller;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-
 
 import com.atguigu.gulimall.member.feign.CouponFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,25 +21,28 @@ import com.atguigu.common.utils.R;
 /**
  * 会员
  *
- * @author Mrguo
- * @email 948485649@qq.com
- * @date 2020-12-29 10:35:02
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:47:05
  */
 @RestController
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
     @Autowired
-    private CouponFeignService couponFeignService;
+    CouponFeignService couponFeignService;
 
     @RequestMapping("/coupons")
-    public R getCoupons(){
+    public R test(){
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setNickname("李四");
-        R membercoupons = couponFeignService.getCoupons();
-        return R.ok().put("member",memberEntity).put("coupons",membercoupons);
+        memberEntity.setNickname("张三");
+
+        R membercoupons = couponFeignService.membercoupons();
+        return R.ok().put("member",memberEntity).put("coupons",membercoupons.get("coupons"));
     }
+
 
     /**
      * 列表

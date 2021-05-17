@@ -3,7 +3,6 @@ package com.atguigu.gulimall.coupon.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -23,29 +22,24 @@ import com.atguigu.common.utils.R;
 /**
  * 优惠券信息
  *
- * @author Mrguo
- * @email 948485649@qq.com
- * @date 2020-12-29 10:40:16
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:36:40
  */
+@RefreshScope
 @RestController
-@RefreshScope //动态刷新配置中心
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
-    @Value("${config.info}")
-    private String key;
 
-    /**
-     * 测试配置中心配置信息动态改变
-     * @return
-     */
-    @RequestMapping("/testConfig")
-    public R testConfig(){
-        return R.ok().put("key",key);
+    @RequestMapping("/member/list")
+    public R membercoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100减10");
+        return R.ok().put("coupons",Arrays.asList(couponEntity));
     }
-
 
     /**
      * 列表

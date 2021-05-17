@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 库存工作单
  * 
- * @author Mrguo
- * @email 948485649@qq.com
- * @date 2020-12-29 10:56:20
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:59:40
  */
 @Mapper
 public interface WareOrderTaskDetailDao extends BaseMapper<WareOrderTaskDetailEntity> {

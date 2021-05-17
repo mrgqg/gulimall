@@ -8,6 +8,9 @@
 
 package com.atguigu.common.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.atguigu.common.exception.BizCodeEnum;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -41,6 +44,13 @@ public class R extends HashMap<String, Object> {
 		return r;
 	}
 
+	public static R error(BizCodeEnum enume) {
+		R r = new R();
+		r.put("code", enume.getCode());
+		r.put("msg", enume.getMessage());
+		return r;
+	}
+
 	public static R ok(String msg) {
 		R r = new R();
 		r.put("msg", msg);
@@ -61,5 +71,34 @@ public class R extends HashMap<String, Object> {
 	public R put(String key, Object value) {
 		super.put(key, value);
 		return this;
+	}
+	public R putData(Object value) {
+		super.put("data", value);
+		return this;
+	}
+
+	public Object getData() {
+		return this.get("data");
+	}
+
+	public  Integer getCode() {
+		return (Integer) this.get("code");
+	}
+
+
+	//利用fastjson进行反序列化
+	public <T> T getData(TypeReference<T> typeReference) {
+		Object data = get("data");	//默认是map
+		String jsonString = JSON.toJSONString(data);
+		T t = JSON.parseObject(jsonString, typeReference);
+		return t;
+	}
+
+	//利用fastjson进行反序列化
+	public <T> T getData(String key, TypeReference<T> typeReference) {
+		Object data = get(key);	//默认是map
+		String jsonString = JSON.toJSONString(data);
+		T t = JSON.parseObject(jsonString, typeReference);
+		return t;
 	}
 }

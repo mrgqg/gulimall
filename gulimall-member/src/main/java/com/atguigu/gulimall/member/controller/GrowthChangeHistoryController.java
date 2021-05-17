@@ -3,7 +3,6 @@ package com.atguigu.gulimall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +20,9 @@ import com.atguigu.common.utils.R;
 /**
  * 成长值变化历史记录
  *
- * @author Mrguo
- * @email 948485649@qq.com
- * @date 2020-12-29 10:35:02
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:47:05
  */
 @RestController
 @RequestMapping("member/growthchangehistory")

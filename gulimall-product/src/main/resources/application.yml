@@ -2,12 +2,30 @@ server:
   port: 7000
 
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://192.168.0.133:3307/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.2.4:3307/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
 
+  redis:
+    host: 192.168.2.4
+    port: 6379
+  #关闭thymeleaf缓存
+  thymeleaf:
+    cache: false
+    suffix: .html
+  session:
+    store-type: redis
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000 #毫秒为单位
+      use-key-prefix: true  #如果指定了前缀就用我们指定的前缀，如果没有就默认使用缓存的名字作为前缀
+      cache-null-values: true # #是否缓存空值，防止缓存穿透
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -15,6 +33,24 @@ mybatis-plus:
       id-type: auto   #主键自增
       logic-delete-value: 0     #逻辑已删除
       logic-not-delete-value: 1  #逻辑已删除
+
+
 logging:
   level:
-    com.atguigu: debug
+    com.atguigu.gulimall: debug
+    org:
+      springframework:
+        cloud:
+          openfeign: debug
+          sleuth: debug
+    io:
+      seata: info
+
+#配置线程池
+gulimall:
+  thread:
+    coreSize: 20
+    maxSize: 200
+    keepAliveTime: 10
+
+
