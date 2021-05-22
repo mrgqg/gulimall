@@ -1,5 +1,6 @@
 package io.renren.utils;
 
+import io.renren.config.CodeGeneratorProperties;
 import io.renren.config.MongoManager;
 import io.renren.entity.ColumnEntity;
 import io.renren.entity.TableEntity;
@@ -32,6 +33,11 @@ import java.util.zip.ZipOutputStream;
 public class GenUtils {
 
     private static String currentTableName;
+    private static CodeGeneratorProperties properties;
+
+    public static void setProperties(CodeGeneratorProperties properties) {
+        GenUtils.properties = properties;
+    }
 
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
@@ -287,8 +293,16 @@ public class GenUtils {
      * 获取配置信息
      */
     public static Configuration getConfig() {
+        Configuration config;
         try {
-            return new PropertiesConfiguration("generator.properties");
+            config = new PropertiesConfiguration("generator.properties");
+            config.setProperty("author",properties.getAuthor());
+            config.setProperty("package",properties.getPackageName());
+            config.setProperty("tablePrefix",properties.getTablePrefix());
+            config.setProperty("email",properties.getEmail());
+            config.setProperty("moduleName",properties.getModuleName());
+            config.setProperty("mainPath",properties.getMainPath());
+            return config;
         } catch (ConfigurationException e) {
             throw new RRException("获取配置文件失败，", e);
         }

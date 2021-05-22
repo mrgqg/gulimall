@@ -12,7 +12,17 @@ var vm = new Vue({
 	el:'#rrapp',
 	data:{
 		main:"main.html",
-        navTitle:"欢迎页"
+        navTitle:"欢迎页",
+		formData:{
+			jdbcUrl:'',
+			mainPath:'',
+			author:'',
+			packageName:'',
+			email:'',
+			tablePrefix:'',
+			moduleName:''
+
+		}
 	},
     methods: {
         donate: function () {
@@ -24,7 +34,46 @@ var vm = new Vue({
                 shadeClose: false,
                 content: ['http://cdn.renren.io/donate.jpg', 'no']
             });
-        }
+        },
+		datasource:function (){
+			layer.open({
+				type: 1,
+				title: "数据源",
+				area: ['806px', '467px'],
+				closeBtn: 1,
+				btn:["确认"],
+				content: $("#dataForm"),
+				success:function (index,layero){
+					$.ajax({
+						type: "GET",
+						url: "/sys/generator/getDatasource",
+						success: function(data){
+
+							vm.formData=data.data
+						}
+					});
+				},
+				yes:function (){
+					console.log(JSON.stringify(vm.formData))
+					$.ajax({
+						type: "post",
+						url: "/sys/generator/setDatasource",
+						data: JSON.stringify(vm.formData),
+						dataType:"json",
+						contentType:"application/json",
+						success: function(data){
+							if(data.code==0){
+								layer.msg(data.msg,{icon:1,time:1500})
+								setTimeout(function (){
+									layer.closeAll();
+									location.reload();
+								},1500)
+							}
+						}
+					});
+				}
+			});
+		}
     }
 });
 
