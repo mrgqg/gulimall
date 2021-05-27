@@ -8,7 +8,9 @@ import org.redisson.api.RLock;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -36,7 +38,7 @@ import javax.annotation.Resource;
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
     @Autowired
-    CategoryBrandRelationService categoryBrandRelationService;
+    private CategoryBrandRelationService categoryBrandRelationService;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -95,6 +97,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      * @param category
      */
     @Override
+    /*@Caching(evict = {
+            @CacheEvict(value = "category",key = "'getLevel1Categorys'"),
+            @CacheEvict(value = "category",key = "'getCatalogJson'"),
+    })*/
+    @CacheEvict(value = "category",allEntries = true)
     public void updateCascade(CategoryEntity category) {
         this.updateById(category);
         categoryBrandRelationService.updateCategoryName(category.getCatId(),category.getName());

@@ -1,2 +1,9 @@
 server:
   port: 9400
+spring:
+  application:
+    name: gulimall-search
+  #关闭thymeleaf缓存
+  thymeleaf:
+    cache: false
+    suffix: .html

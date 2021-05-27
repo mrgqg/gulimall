@@ -74,8 +74,9 @@ public class SysGeneratorController {
 	@RequestMapping("/getDatasource")
 	public R getDatasource(){
 		DruidDataSource druidDataSource = (DruidDataSource)dataSource.dataSource();
-		//System.out.println(data.getRawJdbcUrl());
-		properties.setJdbcUrl(druidDataSource.getRawJdbcUrl());
+		properties.setJdbcUrl(druidDataSource.getUrl());
+		properties.setUsername(druidDataSource.getUsername());
+		System.out.println(druidDataSource.getUrl());
 		return R.ok().put("data",properties);
 	}
 
@@ -86,11 +87,17 @@ public class SysGeneratorController {
 	@PostMapping("/setDatasource")
 	public R setDatasource(@RequestBody CodeGeneratorProperties codeGeneratorProperties) throws SQLException {
 		DruidDataSource druidDataSource = (DruidDataSource)dataSource.dataSource();
-		if (StringUtils.isNotBlank(codeGeneratorProperties.getJdbcUrl()) && !codeGeneratorProperties.getJdbcUrl().equals(druidDataSource.getRawJdbcUrl())){
+		if (StringUtils.isNotBlank(codeGeneratorProperties.getJdbcUrl()) && !codeGeneratorProperties.getJdbcUrl().equals(druidDataSource.getUrl())){
 			druidDataSource.restart();
+			if (StringUtils.isNotBlank(codeGeneratorProperties.getUsername())){
+				druidDataSource.setUsername(codeGeneratorProperties.getUsername());
+			}
+			if (StringUtils.isNotBlank(codeGeneratorProperties.getPassword())){
+				druidDataSource.setPassword(codeGeneratorProperties.getPassword());
+			}
 			druidDataSource.setUrl(codeGeneratorProperties.getJdbcUrl());
 		}
-		BeanUtils.copyProperties(codeGeneratorProperties,properties);
+		BeanUtils.copyProperties(codeGeneratorProperties,properties,"password");
 		return R.ok("修改成功！");
 	}
 }

@@ -2,6 +2,7 @@ package com.atguigu.gulimall.service.impl;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.atguigu.common.es.SkuEsModel;
 import com.atguigu.common.utils.R;
@@ -60,7 +61,7 @@ public class MallSearchServiceImpl implements MallSearchService {
     @Autowired
     private RestHighLevelClient esRestClient;
 
-    @Resource
+    @Autowired
     private ProductFeignService productFeignService;
 
     @Override
@@ -171,7 +172,7 @@ public class MallSearchServiceImpl implements MallSearchService {
         //4、当前商品涉及到的所有分类信息
         //获取到分类的聚合
         List<SearchResult.CatalogVo> catalogVos = new ArrayList<>();
-        ParsedLongTerms catalogAgg = response.getAggregations().get("catalog_agg");
+        ParsedLongTerms catalogAgg = response.getAggregations().get("catalog_agg");//聚合查询时异常
         for (Terms.Bucket bucket : catalogAgg.getBuckets()) {
             SearchResult.CatalogVo catalogVo = new SearchResult.CatalogVo();
             //得到分类id
@@ -392,7 +393,8 @@ public class MallSearchServiceImpl implements MallSearchService {
         attr_id_agg.subAggregation(AggregationBuilders.terms("attr_value_agg").field("attrs.attrValue").size(50));
         searchSourceBuilder.aggregation(attr_agg);
 
-        log.debug("构建的DSL语句 {}",searchSourceBuilder.toString());
+        log.info("构建的DSL语句 {}", searchSourceBuilder.toString());
+        log.info(JSONObject.toJSONString(searchSourceBuilder.toString(),true));
 
         SearchRequest searchRequest = new SearchRequest(new String[]{EsConstant.PRODUCT_INDEX},searchSourceBuilder);
 

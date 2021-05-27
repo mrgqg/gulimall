@@ -157,7 +157,7 @@ public class IndexController {
     public String park() throws InterruptedException {
 
         RSemaphore park = redisson.getSemaphore("park");
-        park.acquire();     //获取一个信号、获取一个值,占一个车位
+        //park.acquire();     //获取一个信号、获取一个值,占一个车位
         boolean flag = park.tryAcquire();
 
         if (flag) {

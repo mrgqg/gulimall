@@ -15,6 +15,8 @@ var vm = new Vue({
         navTitle:"欢迎页",
 		formData:{
 			jdbcUrl:'',
+			username:'',
+			password:'',
 			mainPath:'',
 			author:'',
 			packageName:'',
@@ -39,7 +41,7 @@ var vm = new Vue({
 			layer.open({
 				type: 1,
 				title: "数据源",
-				area: ['806px', '467px'],
+				area: ['806px', '550px'],
 				closeBtn: 1,
 				btn:["确认"],
 				content: $("#dataForm"),
@@ -48,7 +50,6 @@ var vm = new Vue({
 						type: "GET",
 						url: "/sys/generator/getDatasource",
 						success: function(data){
-
 							vm.formData=data.data
 						}
 					});

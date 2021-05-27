@@ -65,6 +65,14 @@
             <version>3.12.0</version>
         </dependency>
 
+        <!--springboot 集成redisson 只引入一个就行 可以不引入redisson springboot版本就是2.2.x 的版本-->
+<!--        <dependency>-->
+<!--            <groupId>org.redisson</groupId>-->
+<!--            <artifactId>redisson-spring-boot-starter</artifactId>-->
+<!--            <version>3.13.1</version>-->
+<!--        </dependency>-->
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>

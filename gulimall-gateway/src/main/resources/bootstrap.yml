@@ -15,9 +15,9 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848  #nacos服务注册地址
-        #server-addr: 192.168.2.4:1111  #nginx 服务注册地址（集群配置）
+        #server-addr: 192.168.2.2:1111  #nginx 服务注册地址（集群配置）
       config:
-        #server-addr: 192.168.2.4:1111  #通过nginx 配置中心地址（集群配置）
+        #server-addr: 192.168.2.2:1111  #通过nginx 配置中心地址（集群配置）
         server-addr: localhost:8848  #nacos配置中心地址
 #        file-extension: yml
 #        group: DEFAULT_GROUP  #不指定的话默认是DEFAULT_GROUP，若配置中心无此分组配置 则加载application.yml中配置
@@ -86,7 +86,12 @@ spring:
         - id: gulimall_host_route
           uri: lb://gulimall-product
           predicates:
-            - Host=**.gulimall.com,gulimall.com #nginx 代理给网关时会丢失请求的host信息
+            - Host=gulimall.com #nginx 代理给网关时会丢失请求的host信息
+
+        - id: search_route
+          uri: lb://gulimall-search
+          predicates:
+            - Host=search.gulimall.com
             #- Cookie=username,mrguo      #带cookies访问  可以通过curl命令 例：curl http://localhost:8767/get/queryCity.do --cookie "username=mrguo"
             #- Header=X-Request-Id,\d+    #请求头带X-Request-Id   并且值是整数（符合正则表达式） 例：curl http://localhost:8767/get/queryCity.do -H "X-Request-Id:123"
             #- Host=**.jzh.com             #请求头带Host 例：curl http://localhost:8767/get/queryCity.do -H "Host:www.jzh.com"
