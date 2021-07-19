@@ -4,18 +4,14 @@ spring:
       discovery:
         server-addr: localhost:8848
       config:
-        #server-addr: 192.168.2.2:1111  #通过nginx 配置中心地址（集群配置）
+        #server-addr: 192.168.0.133:1111  #通过nginx 配置中心地址（集群配置）
         server-addr: localhost:8848  #nacos配置中心地址
         namespace: c4b6dd82-f943-4ca5-b246-5bd637caf98b
         ext-config[0]:  #配置中心中的配置优先生效，
           data-id: oss.yml
           group: DEFAULT_GROUP
           refresh: true
-  #    alicloud:
-  #      access-key: LTAI4G1ahRstzbAuqqe4Z4MV
-  #      secret-key: kBKi3shIHLuBBJsSfT9k7B2DJoQp4v
-  #      oss:
-  #        endpoint: oss-cn-shanghai.aliyuncs.com
+
   application:
     name: gulimall-third-service
 
