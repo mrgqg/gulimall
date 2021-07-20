@@ -11,11 +11,7 @@ spring:
           data-id: oss.yml
           group: DEFAULT_GROUP
           refresh: true
-  #    alicloud:
-  #      access-key: LTAI4G1ahRstzbAuqqe4Z4MV
-  #      secret-key: kBKi3shIHLuBBJsSfT9k7B2DJoQp4v
-  #      oss:
-  #        endpoint: oss-cn-shanghai.aliyuncs.com
+
   application:
     name: gulimall-third-service
 
