@@ -3,16 +3,46 @@ server:
 
 
 spring:
+#  session:
+#    store-type: redis
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://192.168.2.2:3307/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-
+    url: jdbc:mysql://192.168.0.133:3307/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+  redis:
+    port: 6379
+    host: 192.168.0.133
+  thymeleaf:
+    cache: false
+#  #服务追踪
+#  zipkin:
+#    base-url: http://localhost:9411/
+#    #关闭服务发现
+#    discovery-client-enabled: false
+#    sender:
+#      type: web
+#  #配置采样器
+#  sleuth:
+#    sampler:
+#      probability: 1
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto   #主键自增
+
+#开启feign对sentinel的支持
+feign:
+  sentinel:
+    enabled: true
+
+
+#暴露所有端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

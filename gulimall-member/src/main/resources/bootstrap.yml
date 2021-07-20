@@ -1,13 +1,21 @@
 spring:
+  application:
+    name: gulimall-member
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
       config:
-        #server-addr: 192.168.2.2:1111  #通过nginx 配置中心地址（集群配置）
+        #server-addr: 192.168.0.133:1111  #通过nginx 配置中心地址（集群配置）
         server-addr: localhost:8848  #nacos配置中心地址
         namespace: e9bae769-64c4-4d92-bb9c-a87164ad8a5e
-  application:
-    name: gulimall-member
+    #sentinel 监控
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8080  #sentinel 懒加载 需要先访问一次服务  sentinel才能监控到
+#        #默认8719端口  假如被占用会自动从8719开始自动加1扫描  知道找到未被占用的端口
+#        port: 8719
+
+
 
 

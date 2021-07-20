@@ -4,7 +4,7 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
       config:
-        #server-addr: 192.168.2.2:1111  #通过nginx 配置中心地址（集群配置）
+        #server-addr: 192.168.0.133:1111  #通过nginx 配置中心地址（集群配置）
         server-addr: localhost:8848  #nacos配置中心地址
         namespace: cd970bab-49a2-447a-8880-088c9c0fe63a
   application:

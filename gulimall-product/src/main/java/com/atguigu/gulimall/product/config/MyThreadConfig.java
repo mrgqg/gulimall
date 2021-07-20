@@ -16,13 +16,11 @@ import java.util.concurrent.TimeUnit;
  * @createTime: 2020-06-23 20:24
  **/
 
-@EnableConfigurationProperties(com.atguigu.gulimall.product.config.ThreadPoolConfigProperties.class)
+@EnableConfigurationProperties(ThreadPoolConfigProperties.class)
 @Configuration
 public class MyThreadConfig {
-
-
     @Bean
-    public ThreadPoolExecutor threadPoolExecutor(com.atguigu.gulimall.product.config.ThreadPoolConfigProperties pool) {
+    public ThreadPoolExecutor threadPoolExecutor(ThreadPoolConfigProperties pool) {
         return new ThreadPoolExecutor(
                 pool.getCoreSize(),
                 pool.getMaxSize(),
