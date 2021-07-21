@@ -12,7 +12,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * 1）、@EnableRedisHttpSession导入RedisHttpSessionConfiguration配置
  *      1、给容器中添加了一个组件
  *          RedisOperationsSessionRepository：Redis操作session，session的增删改查封装类
- *
+ *      2.
  */
 
 @EnableRedisHttpSession     //整合Redis作为session存储
