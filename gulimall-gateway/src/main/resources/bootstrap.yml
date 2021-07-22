@@ -27,13 +27,6 @@ spring:
         locator:
           enabled: true                 #开启从注册中心创建动态路由的功能，利用微服务名
       routes:
-        - id: gulimall-coupon
-          uri: lb://gulimall-coupon            #请求路径   lb://服务名
-          predicates:                   #断言 路径匹配进行路由  真实请求路径为URI+predicates
-            - Path=/api/coupon/**
-          filters:
-            - StripPrefix=1
-
         - id: gulimall-product
           uri: lb://gulimall-product            #请求路径   lb://服务名
           predicates:                   #断言 路径匹配进行路由  真实请求路径为URI+predicates
@@ -86,12 +79,27 @@ spring:
         - id: gulimall_host_route
           uri: lb://gulimall-product
           predicates:
-            - Host=gulimall.com #nginx 代理给网关时会丢失请求的host信息
+            - Host=gulimall.com,item.gulimall.com  #nginx 代理给网关时会丢失请求的host信息
 
-        - id: search_route
+        - id: gulimall_auth_route
+          uri: lb://gulimall-auth-server
+          predicates:
+            - Host=auth.gulimall.com
+
+        - id: gulimall_search_route
           uri: lb://gulimall-search
           predicates:
             - Host=search.gulimall.com
+
+        - id: gulimall_cart_route
+          uri: lb://gulimall-cart
+          predicates:
+            - Host=cart.gulimall.com
+
+        - id: gulimall_seckill_route
+          uri: lb://gulimall-seckill
+          predicates:
+            - Host=seckill.gulimall.com
             #- Cookie=username,mrguo      #带cookies访问  可以通过curl命令 例：curl http://localhost:8767/get/queryCity.do --cookie "username=mrguo"
             #- Header=X-Request-Id,\d+    #请求头带X-Request-Id   并且值是整数（符合正则表达式） 例：curl http://localhost:8767/get/queryCity.do -H "X-Request-Id:123"
             #- Host=**.jzh.com             #请求头带Host 例：curl http://localhost:8767/get/queryCity.do -H "Host:www.jzh.com"

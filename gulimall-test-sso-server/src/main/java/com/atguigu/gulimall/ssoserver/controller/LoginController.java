@@ -35,27 +35,23 @@ public class LoginController {
 
 
     @GetMapping("/login.html")
-    public String loginPage(@RequestParam("redirect_url") String url, Model model, @CookieValue(value = "sso_token", required = false) String sso_token) {
+    public String loginPage(@RequestParam("redirect_url") String url, Model model,
+                            @CookieValue(value = "sso_token", required = false) String sso_token) {
         if (!StringUtils.isEmpty(sso_token)) {
             return "redirect:" + url + "?token=" + sso_token;
         }
-
-
         model.addAttribute("url", url);
-
         return "login";
     }
 
     @PostMapping(value = "/doLogin")
-    public String doLogin(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("redirect_url") String url, HttpServletResponse response) {
-
+    public String doLogin(@RequestParam("username") String username, @RequestParam("password") String password,
+                          @RequestParam("redirect_url") String url, HttpServletResponse response) {
         //登录成功跳转，跳回到登录页
         if (!StringUtils.isEmpty(username) && !StringUtils.isEmpty(password)) {
-
             String uuid = UUID.randomUUID().toString().replace("_", "");
             redisTemplate.opsForValue().set(uuid, username);
             Cookie sso_token = new Cookie("sso_token", uuid);
-
             response.addCookie(sso_token);
             return "redirect:" + url + "?token=" + uuid;
         }
