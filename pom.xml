@@ -22,6 +22,10 @@
         <module>gulimall-search</module>
         <module>renren-fast</module>
         <module>gulimall-third-service</module>
+        <module>gulimall-test-sso-client</module>
+        <module>gulimall-test-sso-server</module>
+        <module>gulimall-auth-server</module>
+        <module>gulimall-cart</module>
         <module>renren-generator</module>
 
     </modules>

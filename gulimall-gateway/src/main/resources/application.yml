@@ -1,2 +1,15 @@
 server:
   port: 8888
+
+#服务追踪
+spring:
+  zipkin:
+    base-url: http://localhost:9411/
+    #关闭服务发现
+    discovery-client-enabled: false
+    sender:
+      type: web
+  #配置采样器
+  sleuth:
+    sampler:
+      probability: 1

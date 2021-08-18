@@ -22,6 +22,10 @@ spring:
 #        file-extension: yml
 #        group: DEFAULT_GROUP  #不指定的话默认是DEFAULT_GROUP，若配置中心无此分组配置 则加载application.yml中配置
 #        namespace: 54ba071d-b093-4758-9eed-ac217b1fe7dc
+    sentinel:
+      transport:
+        #配置sentinel dashboard地址
+        dashboard: localhost:8080
     gateway:
       discovery:
         locator:
